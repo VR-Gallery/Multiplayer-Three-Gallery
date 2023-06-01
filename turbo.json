@@ -2,10 +2,11 @@
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env.*local"],
   "globalEnv": [
-    "BACKEND_PORT",
     "ENV",
+    "BACKEND_PORT",
+    "BACKEND_URL",
     "FRONTEND_URL",
-    "NEXT_PUBLIC_BACKEND_PORT",
+    "NEXT_PUBLIC_BACKEND_URL",
     "NEXT_PUBLIC_ENV",
     "DISCORD_BOT_TOKEN",
     "DISCORD_BLOT_CLIENT_ID",
