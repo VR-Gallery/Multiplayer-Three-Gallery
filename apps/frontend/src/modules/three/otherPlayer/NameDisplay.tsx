@@ -1,21 +1,17 @@
-import React, { FC, MutableRefObject, useMemo, useRef } from "react";
-import { useParticipant } from "@daily-co/daily-react";
+import React, { FC, MutableRefObject } from "react";
 import { CameraControls, Text } from "@react-three/drei";
-import { Vector3, useFrame } from "@react-three/fiber";
 
 type Props = {
   CameraControlRef: MutableRefObject<CameraControls | null>;
-  dailySessionId: string | null;
+  name: string | null;
   position: [number, number, number];
 };
 
 const GameObject: FC<Props> = ({
   CameraControlRef,
-  dailySessionId,
+  name,
   position,
 }) => {
-  const remoteParticipant = useParticipant(dailySessionId ?? "");
-
   return (
     <Text
       color="white"
@@ -33,7 +29,7 @@ const GameObject: FC<Props> = ({
         0,
       ]}
     >
-      {remoteParticipant?.user_name ?? ""}
+      {name ?? ""}
     </Text>
   );
 };

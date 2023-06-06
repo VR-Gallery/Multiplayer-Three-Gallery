@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ActionName } from "../../otherPlayer/Model";
+import { PlayerActionName } from "models";
 import { Vector3 } from "@react-three/fiber";
 import useAnimationFrame from "@/hooks/useAnimationFrame";
 
@@ -20,7 +20,12 @@ export const useAnimation = (x: number, y: number) => {
       setIsPlaying(false);
     }
   }, isPlaying);
-  return { scale, position, playAnimation: "waving" as ActionName, isPlaying };
+  return {
+    scale,
+    position,
+    playAnimation: "waving" as PlayerActionName,
+    isPlaying,
+  };
 };
 
 export default useAnimation;

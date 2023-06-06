@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import {
   Navbar,
   Typography,
@@ -20,10 +20,10 @@ import {
 import { P, match } from "ts-pattern";
 import HairCheck from "@modules/videoDaily/HairCheck/HairCheck";
 import VideoDollyTray from "@modules/videoDaily/Tray/Tray";
-import { joinState } from "../videoDaily";
+import { joinState } from "@modules/three/sence";
 import { useRecoilState, useRecoilValue } from "recoil";
+import classNames from "classnames";
 
-// profile menu component
 const profileMenuItems = [
   {
     label: "My Profile",
@@ -48,7 +48,7 @@ const profileMenuItems = [
 ];
 
 const ProfileMenu: FC = () => {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const closeMenu = () => setIsMenuOpen(false);
 
   return (
@@ -134,20 +134,23 @@ const StartedMenu: FC = () => {
 };
 
 const ComplexNavbar: FC = () => {
-  const isJoined = useRecoilValue(joinState);
+  const { isJoined, isDailyJoined } = useRecoilValue(joinState);
 
   return (
     <div className="fixed bottom-4 left-0 w-full">
       <Navbar
-        className={`mx-auto p-2 transition-all duration-300 ${match(isJoined)
-          .with(true, () => "h-14 max-w-sm rounded-full pl-6")
-          .otherwise(() => "h-[30rem] max-w-md rounded-3xl ")}`}
+        className={classNames(
+          "mx-auto",
+          "p-2",
+          "transition-all",
+          "duration-300",
+          {
+            "h-14 max-w-sm rounded-full pl-6": isJoined,
+            "h-[47rem] max-w-md rounded-3xl": !isJoined,
+          }
+        )}
       >
-        {match(isJoined)
-          .with(true, () => <JoinedMenu />)
-          .otherwise(() => (
-            <StartedMenu />
-          ))}
+        {isJoined ? <JoinedMenu /> : <StartedMenu />}
       </Navbar>
     </div>
   );

@@ -1,16 +1,22 @@
 import React, { FC, MutableRefObject, useMemo, useState } from "react";
-import { Model, ActionName } from "./Model";
+import { Model as FemaleModel } from "@/modules/three/player/ModelFemale";
+import { Model as MaleModel } from "@/modules/three/player/ModelMale";
+import { PlayerActionName } from "models";
+
 import VideoScreen from "./VideoScreen";
 import NameDisplay from "./NameDisplay";
 import { Euler, useFrame, Vector3 } from "@react-three/fiber";
 import { CameraControls } from "@react-three/drei";
 import { useRecoilValue } from "recoil";
-import { joinState } from "@/modules/videoDaily";
+import { joinState } from "@modules/three/sence";
+import { match } from "ts-pattern";
 
 type Props = {
   position: [number, number, number];
   rotation: [number, number, number];
+  name: string | null;
   playAnimation: string;
+  useModelType: string;
   dailySessionId: string | null;
   CameraControlRef: MutableRefObject<CameraControls | null>;
 };
@@ -18,6 +24,8 @@ type Props = {
 const GameObject: FC<Props> = ({
   position: realPosition,
   rotation: realRotation,
+  name,
+  useModelType,
   playAnimation,
   dailySessionId,
   CameraControlRef,
@@ -43,26 +51,37 @@ const GameObject: FC<Props> = ({
       return [x + dx / 10, y + dy / 10, z + dz / 10];
     });
   });
-  const isJoined = useRecoilValue(joinState);
+  const { isJoined, isDailyJoined } = useRecoilValue(joinState);
 
   return (
     <>
-      {isJoined && dailySessionId && (
-        <>
-          <VideoScreen position={position} dailySessionId={dailySessionId} />
-          <NameDisplay
-            position={position}
-            dailySessionId={dailySessionId}
-            CameraControlRef={CameraControlRef}
-          />
-        </>
+      {isDailyJoined && dailySessionId && (
+        <VideoScreen position={position} dailySessionId={dailySessionId} />
       )}
-      <Model
-        position={position as Vector3}
-        rotation={rotation as Euler}
-        scale={0.5}
-        playAnimation={playAnimation as ActionName}
+
+      <NameDisplay
+        position={position}
+        name={name}
+        CameraControlRef={CameraControlRef}
       />
+      {match(useModelType)
+        .with("male", () => (
+          <MaleModel
+            position={position as Vector3}
+            rotation={rotation as Euler}
+            scale={0.5}
+            playAnimation={playAnimation as PlayerActionName}
+          />
+        ))
+        .with("female", () => (
+          <FemaleModel
+            position={position as Vector3}
+            rotation={rotation as Euler}
+            scale={0.5}
+            playAnimation={playAnimation as PlayerActionName}
+          />
+        ))
+        .otherwise(() => null)}
     </>
   );
 };

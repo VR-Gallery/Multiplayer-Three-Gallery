@@ -1,27 +1,31 @@
 import { log } from "logger";
 import DailyIframe, { DailyCall, DailyEvent } from "@daily-co/daily-js";
 import { DailyProvider, useDaily } from "@daily-co/daily-react";
-import { atom, useSetRecoilState } from "recoil";
 import { useCallback, useEffect, useState, FC } from "react";
 const ROOM_URL = "https://ray-realms.daily.co/my-room";
 
-export const joinState = atom({
-  key: "isJoined",
-  default: false,
-});
-
 export function useJoinedDailyApp() {
-  const setIsJoined = useSetRecoilState(joinState);
   const callObject = useDaily();
   const joinCall = useCallback(() => {
     if (!ROOM_URL || !callObject) {
       return;
     }
     callObject.join({ url: ROOM_URL });
-    setIsJoined(true);
   }, [callObject]);
 
   return { joinCall };
+}
+
+export function useLeaveDailyApp() {
+  const callObject = useDaily();
+  const leaveCall = useCallback(() => {
+    if (!ROOM_URL || !callObject) {
+      return;
+    }
+    callObject.leave();
+  }, [callObject]);
+
+  return { leaveCall };
 }
 
 type DailyAppType = {
@@ -53,9 +57,15 @@ const DailyApp: FC<DailyAppType> = ({ children }) => {
 
     function handleNewMeetingState() {
       if (!callObject) return;
-      console.log(callObject.meetingState());
+
       switch (callObject.meetingState()) {
         case "joined-meeting":
+          log("setIsJoined");
+          break;
+        case "left-meeting":
+          callObject.destroy().then(() => {
+            setCallObject(null);
+          });
           break;
         case "error":
           log("error");

@@ -7,15 +7,13 @@ import {
   DailyAudio,
 } from "@daily-co/daily-react";
 import Tile from "../Tile/Tile";
-import UserMediaError from "../UserMediaError/UserMediaError";
 
 export default function Call() {
-  const [getUserMediaError, setGetUserMediaError] = useState(false);
-
   useDailyEvent(
     "camera-error",
-    useCallback(() => {
-      setGetUserMediaError(true);
+    useCallback((error) => {
+      alert("設備取得出現問題: 請在 開發者工具 查看完整資訊");
+      console.error(error);
     }, [])
   );
 
@@ -28,7 +26,7 @@ export default function Call() {
     [remoteParticipantIds, screens]
   );
 
-  const renderCallScreen = () => (
+  return (
     <div className={`fixed right-2 top-2 flex gap-4`}>
       <div className="hidden">
         {remoteParticipantIds.map((id) => (
@@ -50,6 +48,4 @@ export default function Call() {
       <DailyAudio />
     </div>
   );
-
-  return getUserMediaError ? <UserMediaError /> : renderCallScreen();
 }
