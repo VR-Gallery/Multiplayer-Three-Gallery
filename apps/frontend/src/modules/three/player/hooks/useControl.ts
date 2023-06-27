@@ -9,10 +9,10 @@ const useControl = (
   controlType: ControlType,
   CameraControlRef: MutableRefObject<CameraControls | null>
 ) => {
-  const maxX = 7.3;
-  const minX = -0.3;
-  const maxZ = 7.3;
-  const minZ = -0.3;
+  const maxX = 13.7;
+  const minX = -1.7;
+  const maxZ = 13.7;
+  const minZ = -1.7;
   const speed = 0.03;
   const floorHeight = 0;
   const [motion, setMotion] = useState([0, 0, 0]);

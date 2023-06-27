@@ -11,6 +11,8 @@ import {
 } from "@/modules/ui/JoyStickController";
 import DailyApp from "@/modules/videoDaily";
 import useCSR from "@/hooks/useCSR";
+import { CursorInfoPopup } from "@/modules/ui/CursorInfoPopup";
+
 
 export default function Page() {
   const isCSR = useCSR();
@@ -23,10 +25,11 @@ export default function Page() {
       </Head>
       <JoyStickControllerProvider>
         <DailyApp>
-          <div className=" fixed h-full w-full bg-blue-gray-50">
+          <div className=" fixed h-full w-full bg-gray-900">
             <Sence />
             {isCSR && <Navbar />}
             <Headbar />
+            <CursorInfoPopup />
             <Sidebar isMiroOpen={isMiroOpen} setIsMiroOpen={setIsMiroOpen} />
             <JoyStickController />
             {isCSR && (

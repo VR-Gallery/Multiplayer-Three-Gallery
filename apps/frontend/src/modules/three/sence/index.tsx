@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import FloorBlock from "@/modules/three/floorBlock";
 import WallBlock from "@/modules/three/wallBlock";
 import Player from "@/modules/three/player";
@@ -10,6 +10,9 @@ import { Stats, OrbitControls, CameraControls } from "@react-three/drei";
 import { socket } from "@/utils/socket";
 import { match, P } from "ts-pattern";
 import { atom } from "recoil";
+import { CubeTextureLoader } from "three";
+import { CursorInfoPopup } from "@/modules/ui/CursorInfoPopup";
+
 export type ControlType = "FirstPerson" | "ThirdPerson";
 
 export const joinState = atom<{
@@ -67,53 +70,92 @@ const useOtherPlayersUpdate = () => {
 const galleryPictures = [
   {
     url: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/gallery/2813.jpg`,
-    position: [7.6, 1.3, 6.5],
+    videoURL: "",
+    position: [13.9, 1.6, 12.0],
     rotation: [0, Math.PI * 1.5, 0],
     scale: 2,
+    description: "平靜",
   },
   {
     url: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/gallery/2814.jpg`,
-    position: [7.6, 1.3, 4.4],
+    videoURL: "",
+    position: [13.9, 1.6, 8.0],
     rotation: [0, Math.PI * 1.5, 0],
     scale: 1.1,
+    description: "田園",
   },
   {
     url: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/gallery/2815.jpg`,
-    position: [7.6, 1.3, 2.4],
+    videoURL: "",
+    position: [13.9, 1.6, 4.0],
     rotation: [0, Math.PI * 1.5, 0],
     scale: 2,
+    description: "迎春",
   },
   {
     url: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/gallery/2816.jpg`,
-    position: [7.6, 1.3, 0.8],
+    videoURL: "",
+    position: [13.9, 1.6, 0.4],
     rotation: [0, Math.PI * 1.5, 0],
     scale: 1.5,
+    description: "金秋",
   },
   {
     url: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/gallery/2817.jpg`,
-    position: [6.1, 1.3, 7.5],
+    videoURL: "",
+    position: [12.1, 1.6, 13.9],
     rotation: [0, Math.PI * 1, 0],
     scale: 1.1,
+    description: "黃沙天",
   },
   {
     url: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/gallery/2818.jpg`,
-    position: [3.8, 1.3, 7.5],
+    videoURL: "",
+    position: [8.0, 1.6, 13.9],
     rotation: [0, Math.PI * 1, 0],
     scale: 1.1,
+    description: "曠野",
   },
   {
     url: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/gallery/2819.jpg`,
-    position: [2, 1.3, 7.5],
+    videoURL: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/gallery/2819.mp4`,
+    position: [4, 1.6, 13.9],
     rotation: [0, Math.PI * 1, 0],
     scale: 0.78,
+    description: "第53號構圖—紅雨村白雲舍 點擊以播放動畫",
   },
   {
     url: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/gallery/2820.jpg`,
-    position: [0.5, 1.3, 7.5],
+    videoURL: "",
+    position: [0.5, 1.6, 13.9],
     rotation: [0, Math.PI * 1, 0],
     scale: 0.78,
+    description: "第 25 號構圖—秋",
   },
 ];
+
+// Loads the skybox texture and applies it to the scene.
+function SkyBox() {
+  const { scene } = useThree();
+  const loader = new CubeTextureLoader();
+
+  const texture = useMemo(
+    () =>
+      loader.load([
+        `${process.env.NEXT_PUBLIC_FRONTEND_URL}/skybox/6.jpg`,
+        `${process.env.NEXT_PUBLIC_FRONTEND_URL}/skybox/1.jpg`,
+        `${process.env.NEXT_PUBLIC_FRONTEND_URL}/skybox/3.jpg`,
+        `${process.env.NEXT_PUBLIC_FRONTEND_URL}/skybox/2.jpg`,
+        `${process.env.NEXT_PUBLIC_FRONTEND_URL}/skybox/4.jpg`,
+        `${process.env.NEXT_PUBLIC_FRONTEND_URL}/skybox/5.jpg`,
+      ]),
+    []
+  );
+
+  // Set the scene background property to the resulting texture.
+  scene.background = texture;
+  return null;
+}
 
 const Sence = () => {
   const cameraControlRef = useRef<CameraControls | null>(null);
@@ -130,21 +172,24 @@ const Sence = () => {
       {/* 建立 8x8 的地板 */}
       {Array.from({ length: 8 }, (_, x) =>
         Array.from({ length: 8 }, (_, y) => (
-          <FloorBlock key={`${x}${y}`} x={x} y={y} />
+          <FloorBlock key={`${x}${y}`} x={x * 2 - 1} y={y * 2 - 1} />
         ))
       )}
       <ambientLight intensity={0.2} />
       <WallBlock />
       <Player CameraControlRef={cameraControlRef} controlType={controlType} />
-      {galleryPictures.map(({ url, position, rotation, scale }) => (
+      {galleryPictures.map(({ url, videoURL,description, position, rotation, scale }) => (
         <PictureFrame
           key={url}
           url={url}
           position={position as [number, number, number]}
           rotation={rotation as [number, number, number]}
           scale={scale}
+          videoURL={videoURL}
+          description={description}
         />
       ))}
+
       {otherPlayers.map(
         ({
           id,
