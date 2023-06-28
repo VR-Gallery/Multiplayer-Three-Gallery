@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Vector3 } from "@react-three/fiber";
 import useAnimationFrame from "@/hooks/useAnimationFrame";
 
-const useAnimation = () => {
+const useAnimation = (usePictureAnimPlay: boolean) => {
   const x = 3.5;
   const y = 3.5;
   const fallingTime = 2;
@@ -15,13 +15,13 @@ const useAnimation = () => {
     const elapsed = time - delay;
     if (elapsed > 0 && elapsed < fallingTime) {
       setScale(Math.sin(elapsed * fallingRate));
-      setPosition([x, 10 - Math.sin(elapsed * fallingRate) * 10, y]);
+      setPosition([x, 10 - Math.sin(elapsed * fallingRate) * 10 + 0.1, y]);
     } else if (elapsed >= fallingTime) {
       setScale(1);
-      setPosition([x, 0, y]);
+      setPosition([x, 0.1, y]);
       setIsPlaying(false);
     }
-  }, isPlaying);
+  }, true);
   return { scale, position };
 };
 

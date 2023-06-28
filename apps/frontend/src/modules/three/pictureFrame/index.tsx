@@ -17,6 +17,8 @@ type PictureFrameProps = {
   videoURL: string;
   pixelPerMeter?: number;
   description: string;
+  usePictureAnimPlay: boolean;
+  setUsePictureAnimPlay: (value: boolean) => void;
 } & JSX.IntrinsicElements["mesh"];
 
 // 這是一個將圖片放在 three 的場景中的元件
@@ -33,15 +35,13 @@ const pictureFrame = (props: PictureFrameProps) => {
   const [width, height] = [texture.image.width, texture.image.height];
   const pixelPerMeter = props.pixelPerMeter ?? 1000;
 
-  const [playAnim, setPlayAnim] = useState(false);
-
   return (
     <mesh
       {...props}
       ref={ref}
       onClick={() => {
         if (props.videoURL) {
-          setPlayAnim(!playAnim);
+          props.setUsePictureAnimPlay(!props.usePictureAnimPlay);
         }
       }}
       onPointerOver={() => {
@@ -66,7 +66,7 @@ const pictureFrame = (props: PictureFrameProps) => {
       <planeBufferGeometry
         args={[width / pixelPerMeter, height / pixelPerMeter, 1, 1]}
       />
-      {props.videoURL && playAnim ? (
+      {props.videoURL && props.usePictureAnimPlay ? (
         <VideoTexture videoURL={props.videoURL} />
       ) : (
         <meshBasicMaterial map={texture} />

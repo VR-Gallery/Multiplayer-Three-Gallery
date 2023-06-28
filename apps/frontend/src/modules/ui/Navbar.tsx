@@ -115,12 +115,11 @@ const JoinedMenu: FC = () => {
         href="#"
         className="ml-2 mr-4 cursor-pointer py-1.5 font-medium"
       >
-        Room #0
+        師大藝廊
       </Typography>
       <div className="absolute left-2/4 top-2/4 -translate-x-2/4 -translate-y-2/4">
         <VideoDollyTray />
       </div>
-      <ProfileMenu />
     </div>
   );
 };
@@ -137,11 +136,11 @@ const ComplexNavbar: FC = () => {
   const { isJoined, isDailyJoined } = useRecoilValue(joinState);
 
   return (
-    <div className="fixed bottom-4 left-0 w-full">
+    <div className="fixed bottom-4 left-0 w-full z-10">
       <Navbar
         className={classNames(
           "mx-auto",
-          "p-2",
+          "p-2 ",
           "transition-all",
           "duration-300",
           {

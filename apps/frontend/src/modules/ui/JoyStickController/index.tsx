@@ -38,7 +38,7 @@ export const JoyStickController: FC = () => {
   }, []);
   if (!isTouch) return <></>;
   return (
-    <div className="fixed bottom-24 left-auto right-16 md:bottom-16 md:left-16">
+    <div className="fixed bottom-24 left-auto right-16 md:bottom-16 md:left-16 z-0">
       <Joystick
         size={100}
         baseColor="#f5f5f5"

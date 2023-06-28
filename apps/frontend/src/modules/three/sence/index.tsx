@@ -134,33 +134,12 @@ const galleryPictures = [
   },
 ];
 
-// Loads the skybox texture and applies it to the scene.
-function SkyBox() {
-  const { scene } = useThree();
-  const loader = new CubeTextureLoader();
-
-  const texture = useMemo(
-    () =>
-      loader.load([
-        `${process.env.NEXT_PUBLIC_FRONTEND_URL}/skybox/6.jpg`,
-        `${process.env.NEXT_PUBLIC_FRONTEND_URL}/skybox/1.jpg`,
-        `${process.env.NEXT_PUBLIC_FRONTEND_URL}/skybox/3.jpg`,
-        `${process.env.NEXT_PUBLIC_FRONTEND_URL}/skybox/2.jpg`,
-        `${process.env.NEXT_PUBLIC_FRONTEND_URL}/skybox/4.jpg`,
-        `${process.env.NEXT_PUBLIC_FRONTEND_URL}/skybox/5.jpg`,
-      ]),
-    []
-  );
-
-  // Set the scene background property to the resulting texture.
-  scene.background = texture;
-  return null;
-}
-
 const Sence = () => {
   const cameraControlRef = useRef<CameraControls | null>(null);
   const otherPlayers = useOtherPlayersUpdate();
   const controlType = useControlType();
+
+  const [usePictureAnimPlay, setUsePictureAnimPlay] = useState(false);
 
   return (
     <Canvas camera={{ fov: 45, position: [-4, 6, -4] }}>
@@ -176,19 +155,23 @@ const Sence = () => {
         ))
       )}
       <ambientLight intensity={0.2} />
-      <WallBlock />
+      <WallBlock usePictureAnimPlay={usePictureAnimPlay} />
       <Player CameraControlRef={cameraControlRef} controlType={controlType} />
-      {galleryPictures.map(({ url, videoURL,description, position, rotation, scale }) => (
-        <PictureFrame
-          key={url}
-          url={url}
-          position={position as [number, number, number]}
-          rotation={rotation as [number, number, number]}
-          scale={scale}
-          videoURL={videoURL}
-          description={description}
-        />
-      ))}
+      {galleryPictures.map(
+        ({ url, videoURL, description, position, rotation, scale }) => (
+          <PictureFrame
+            key={url}
+            url={url}
+            position={position as [number, number, number]}
+            rotation={rotation as [number, number, number]}
+            scale={scale}
+            videoURL={videoURL}
+            description={description}
+            usePictureAnimPlay={usePictureAnimPlay}
+            setUsePictureAnimPlay={setUsePictureAnimPlay}
+          />
+        )
+      )}
 
       {otherPlayers.map(
         ({

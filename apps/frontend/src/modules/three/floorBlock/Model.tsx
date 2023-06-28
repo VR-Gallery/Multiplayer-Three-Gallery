@@ -11,7 +11,7 @@ import model from "./assets/model-transformed.glb";
 
 type GLTFResult = GLTF & {
   nodes: {
-    plane: THREE.Mesh
+    平面: THREE.Mesh
   }
   materials: {
     材質: THREE.MeshStandardMaterial
@@ -22,7 +22,7 @@ export function Model(props: JSX.IntrinsicElements['group']) {
   const { nodes, materials } = useGLTF(model) as GLTFResult
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.plane.geometry} material={materials.材質} />
+      <mesh geometry={nodes.平面.geometry} material={materials.材質} />
     </group>
   )
 }

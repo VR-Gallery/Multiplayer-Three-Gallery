@@ -25,7 +25,7 @@ export default function Page() {
       </Head>
       <JoyStickControllerProvider>
         <DailyApp>
-          <div className=" fixed h-full w-full bg-gray-900">
+          <div className=" fixed h-full w-full bg-gray-500">
             <Sence />
             {isCSR && <Navbar />}
             <Headbar />
