@@ -12,11 +12,10 @@ import {
 import DailyApp from "@/modules/videoDaily";
 import useCSR from "@/hooks/useCSR";
 import { CursorInfoPopup } from "@/modules/ui/CursorInfoPopup";
-
+import { KeyboardControls } from "@react-three/drei";
 
 export default function Page() {
   const isCSR = useCSR();
-  const [isMiroOpen, setIsMiroOpen] = useState(false);
 
   return (
     <>
@@ -25,23 +24,24 @@ export default function Page() {
       </Head>
       <JoyStickControllerProvider>
         <DailyApp>
-          <div className=" fixed h-full w-full bg-gray-500">
-            <Sence />
-            {isCSR && <Navbar />}
-            <Headbar />
-            <CursorInfoPopup />
-            <Sidebar isMiroOpen={isMiroOpen} setIsMiroOpen={setIsMiroOpen} />
-            <JoyStickController />
-            {isCSR && (
-              <div
-                style={{
-                  display: isMiroOpen ? "block" : "none",
-                }}
-              >
-                <MiroBoard />
-              </div>
-            )}
-          </div>
+          <KeyboardControls
+            map={[
+              { name: "forward", keys: ["KeyW"] },
+              { name: "backward", keys: ["KeyS"] },
+              { name: "leftward", keys: ["KeyA"] },
+              { name: "rightward", keys: ["KeyD"] },
+              { name: "jump", keys: ["Space"] },
+            ]}
+          >
+            <div className=" fixed h-full w-full bg-gray-500">
+              <Sence />
+              {isCSR && <Navbar />}
+              <Headbar />
+              <CursorInfoPopup />
+              <Sidebar />
+              <JoyStickController />
+            </div>
+          </KeyboardControls>
         </DailyApp>
       </JoyStickControllerProvider>
     </>
