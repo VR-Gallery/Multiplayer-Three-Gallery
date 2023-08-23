@@ -5,11 +5,12 @@ import Player from "@/modules/three/player";
 import OtherPlayer from "@/modules/three/otherPlayer";
 import PictureFrame from "@/modules/three/pictureFrame";
 import { Player as TypePlayer } from "models";
-import { Stats, OrbitControls, CameraControls } from "@react-three/drei";
+import { OrbitControls, CameraControls, Environment } from "@react-three/drei";
 import { socket } from "@/utils/socket";
 import { match, P } from "ts-pattern";
 import { atom } from "recoil";
-import { MeshCollider, Physics, RigidBody } from "@react-three/rapier";
+import { Debug, Physics, useBox } from "@react-three/cannon";
+import { useControls } from "leva";
 
 export type ControlType = "FirstPerson" | "ThirdPerson";
 
@@ -69,7 +70,7 @@ const galleryPictures = [
   {
     url: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/gallery/2813.jpg`,
     videoURL: "",
-    position: [5.9, 5, 12.0],
+    position: [4.4, 0.1, 12.6],
     rotation: [0, Math.PI * 1.5, 0],
     scale: 2,
     description: "平靜",
@@ -77,7 +78,7 @@ const galleryPictures = [
   {
     url: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/gallery/2814.jpg`,
     videoURL: "",
-    position: [13.9, 1.6, 8.0],
+    position: [4.4, 0.12, 20.3],
     rotation: [0, Math.PI * 1.5, 0],
     scale: 1.1,
     description: "田園",
@@ -85,49 +86,49 @@ const galleryPictures = [
   {
     url: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/gallery/2815.jpg`,
     videoURL: "",
-    position: [13.9, 1.6, 4.0],
-    rotation: [0, Math.PI * 1.5, 0],
+    position: [-4.69, 0.03, 10.7],
+    rotation: [0, 0.5, 0],
     scale: 2,
     description: "迎春",
   },
   {
     url: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/gallery/2816.jpg`,
     videoURL: "",
-    position: [40, 3.6, 14],
-    rotation: [0, Math.PI * 1.06, 0],
-    scale: 1.5*3,
+    position: [-6.7, 0.03, 11.8],
+    rotation: [0, 0.5, 0],
+    scale: 1.5,
     description: "金秋",
   },
   {
     url: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/gallery/2817.jpg`,
     videoURL: "",
-    position: [32, 3.6, 15.9],
-    rotation: [0, Math.PI * 1.06, 0],
-    scale: 1.1 * 3,
+    position: [-9.2, 0.03, 13.2],
+    rotation: [0, 0.5, 0],
+    scale: 1.1,
     description: "黃沙天",
   },
   {
     url: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/gallery/2818.jpg`,
     videoURL: "",
-    position: [25, 3.6, 17.4],
-    rotation: [0, Math.PI * 1.06, 0],
-    scale: 1.1 * 3,
+    position: [-10.16, 0.03, 16.03],
+    rotation: [0, 1.79, 0],
+    scale: 1.1,
     description: "曠野",
   },
   {
     url: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/gallery/2819.jpg`,
     videoURL: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/gallery/2819.mp4`,
-    position: [20, 3.6, 18.4],
-    rotation: [0, Math.PI * 1.06, 0],
-    scale: 0.78 * 3,
+    position: [-8.9, 2.03, 21.0],
+    rotation: [0, 1.79, 0],
+    scale: 3.0,
     description: "第53號構圖—紅雨村白雲舍 點擊以播放動畫",
   },
   {
     url: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/gallery/2820.jpg`,
     videoURL: "",
-    position: [15, 3.6, 19.4],
-    rotation: [0, Math.PI * 1.06, 0],
-    scale: 0.78 * 3,
+    position: [-7.9, 0.03, 26.06],
+    rotation: [0, 1.79, 0],
+    scale: 1.1,
     description: "第 25 號構圖—秋",
   },
 ];
@@ -142,21 +143,30 @@ const Sence = () => {
   return (
     <Canvas camera={{ fov: 45, position: [-4, 6, -4] }}>
       <Suspense>
-        <Physics gravity={[0, -3, 0]}>
+        <Physics
+          gravity={[0, -9, 0]}
+          tolerance={0}
+          iterations={50}
+          broadphase={"SAP"}
+        >
           {match(process.env.ENV)
             .with("DEV", () => <OrbitControls target={[4, 0, 4]} />)
             .otherwise(() => (
               <CameraControls ref={cameraControlRef} makeDefault />
             ))}
 
-          <ambientLight intensity={0.2} />
-          {/* <Player
+          <Environment files="/skybox/sky.hdr" background={true} />
+          <OrbitControls target={[4, 0, 4]} />
+          <Player
             CameraControlRef={cameraControlRef}
             controlType={controlType}
-          /> */}
+          /> 
           <Gallery />
           {galleryPictures.map(
-            ({ url, videoURL, description, position, rotation, scale }) => (
+            (
+              { url, videoURL, description, position, rotation, scale },
+              index
+            ) => (
               <PictureFrame
                 key={url}
                 url={url}

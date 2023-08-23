@@ -4,7 +4,7 @@ import Sidebar from "@/modules/ui/Sidebar";
 import Navbar from "@/modules/ui/Navbar";
 import Headbar from "@/modules/ui/Headbar";
 import MiroBoard from "@/modules/ui/MiroBoard";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import {
   JoyStickController,
   JoyStickControllerProvider,
@@ -12,10 +12,28 @@ import {
 import DailyApp from "@/modules/videoDaily";
 import useCSR from "@/hooks/useCSR";
 import { CursorInfoPopup } from "@/modules/ui/CursorInfoPopup";
-import { KeyboardControls } from "@react-three/drei";
+import { KeyboardControls, KeyboardControlsEntry } from "@react-three/drei";
+
+export enum Controls {
+  forward = "forward",
+  back = "back",
+  left = "left",
+  right = "right",
+  jump = "jump",
+}
 
 export default function Page() {
   const isCSR = useCSR();
+  const map = useMemo<KeyboardControlsEntry<Controls>[]>(
+    () => [
+      { name: Controls.forward, keys: ["ArrowUp", "KeyW"] },
+      { name: Controls.back, keys: ["ArrowDown", "KeyS"] },
+      { name: Controls.left, keys: ["ArrowLeft", "KeyA"] },
+      { name: Controls.right, keys: ["ArrowRight", "KeyD"] },
+      { name: Controls.jump, keys: ["Space"] },
+    ],
+    []
+  );
 
   return (
     <>
@@ -24,15 +42,7 @@ export default function Page() {
       </Head>
       <JoyStickControllerProvider>
         <DailyApp>
-          <KeyboardControls
-            map={[
-              { name: "forward", keys: ["KeyW"] },
-              { name: "backward", keys: ["KeyS"] },
-              { name: "leftward", keys: ["KeyA"] },
-              { name: "rightward", keys: ["KeyD"] },
-              { name: "jump", keys: ["Space"] },
-            ]}
-          >
+          <KeyboardControls map={map}>
             <div className=" fixed h-full w-full bg-gray-500">
               <Sence />
               {isCSR && <Navbar />}
