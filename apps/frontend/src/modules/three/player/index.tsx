@@ -16,7 +16,6 @@ import { CameraControls } from "@react-three/drei";
 import { socket } from "@/utils/socket";
 import { Player, PlayerModels } from "models";
 import useCamaeraControl from "./hooks/useCamaeraControl";
-import useControl from "./hooks/useControl";
 import { ControlType } from "@/modules/three/sence";
 import useAnimation from "./hooks/useAnimation";
 import { useLocalParticipant } from "@daily-co/daily-react";
