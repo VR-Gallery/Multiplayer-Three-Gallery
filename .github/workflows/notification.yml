@@ -1,5 +1,5 @@
 # workflow 名稱
-name: notification
+name: Notification
 
 # 什麼情況下觸發 workflow
 on:
