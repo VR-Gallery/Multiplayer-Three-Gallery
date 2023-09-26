@@ -6,9 +6,10 @@ WORKDIR /home/t110820046/project
 COPY package.json yarn.lock ./
 
 RUN yarn --frozen-lockfile
+RUN npm install -g turbo
 
 COPY . .
-RUN yarn build-force
+RUN yarn build
 
 EXPOSE 3090 5090
 
