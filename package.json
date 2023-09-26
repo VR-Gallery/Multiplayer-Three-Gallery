@@ -1,13 +1,13 @@
 {
   "private": true,
   "scripts": {
-    "build": "yarn dotenv -e .env turbo run build",
-    "clean": "yarn dotenv -e .env turbo run clean",
-    "dev": "yarn dotenv -e .env turbo run dev --concurrency=17 --no-cache --continue",
-    "format": "yarn dotenv -e .env prettier --write \"**/*.{ts,tsx,md}\"",
-    "lint": "yarn dotenv -e .env turbo run lint",
-    "test": "yarn dotenv -e .env turbo run test",
-    "start": "yarn dotenv -e .env turbo run start"
+    "build": "turbo run build",
+    "clean": "turbo run clean",
+    "dev": "turbo run dev --concurrency=17 --no-cache --continue",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "start": "turbo run start"
   },
   "devDependencies": {
     "prettier": "^2.7.1",
