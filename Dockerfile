@@ -9,6 +9,7 @@ RUN apk add --no-cache libc6-compat
 RUN yarn install 
 RUN yarn global add turbo
 RUN yarn global add tsup 
+RUN yarn global add zod
 
 COPY . .
 
