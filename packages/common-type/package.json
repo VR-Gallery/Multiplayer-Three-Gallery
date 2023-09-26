@@ -1,5 +1,5 @@
 {
-  "name": "models",
+  "name": "common-type",
   "version": "0.0.0",
   "private": true,
   "main": "./dist/index.js",
@@ -28,5 +28,5 @@
     "tsconfig": "*",
     "typescript": "^4.8.3",
     "zod": "^3.21.4"
-  },
+  }
 }
