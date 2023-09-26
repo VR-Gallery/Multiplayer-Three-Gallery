@@ -8,7 +8,7 @@ on:
 env:
   PROJECT_ID: ${{ secrets.GCE_PROJECT }}
   GCE_INSTANCE: instance-1
-  GCE_INSTANCE_ZONE: asia-east1-b
+  GCE_INSTANCE_ZONE: asia-east1
   SERVICE_NAME: turborepo-multiplayer-three-gallery
 
 jobs:
