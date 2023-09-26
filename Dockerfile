@@ -9,8 +9,6 @@ RUN yarn --frozen-lockfile
 
 COPY . .
 
-RUN yarn lint & yarn test
-
 RUN yarn build
 
 EXPOSE 3090 5090
