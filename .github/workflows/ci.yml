@@ -1,4 +1,4 @@
-name: turborepo-multiplayer-three-gallery
+name: gallery
 
 on:
   push:
@@ -9,7 +9,8 @@ env:
   PROJECT_ID: ${{ secrets.GCE_PROJECT }}
   GCE_INSTANCE: instance-1
   GCE_INSTANCE_ZONE: asia-east1
-  SERVICE_NAME: turborepo-multiplayer-three-gallery
+  FRONTEND_SERVICE_NAME: gallery-frontend
+  BACKEND_SERVICE_NAME: gallery-backend
 
 jobs:
   build-and-deploy:
@@ -49,9 +50,20 @@ jobs:
         run: |-
           docker push "gcr.io/$PROJECT_ID/$GCE_INSTANCE-image:$GITHUB_SHA"
 
-      - name: Deploy
+      # Deploy the Docker image to Cloud Run
+      - name: Deploy Frontend
         run: |-
-          gcloud run deploy "$SERVICE_NAME" \
+          gcloud run deploy "$FRONTEND_SERVICE_NAME" \
+            --region "$GCE_INSTANCE_ZONE" \
+            --image "gcr.io/$PROJECT_ID/$GCE_INSTANCE-image:$GITHUB_SHA" \
+            --platform "managed" \
+            --port 80 \
+            --allow-unauthenticated
+
+      # Deploy the Docker image to Cloud Run
+      - name: Deploy Backend
+        run: |-
+          gcloud run deploy "$BACKEND_SERVICE_NAME" \
             --region "$GCE_INSTANCE_ZONE" \
             --image "gcr.io/$PROJECT_ID/$GCE_INSTANCE-image:$GITHUB_SHA" \
             --platform "managed" \
