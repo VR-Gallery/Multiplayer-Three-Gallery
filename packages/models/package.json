@@ -28,5 +28,27 @@
     "tsconfig": "*",
     "typescript": "^4.8.3",
     "zod": "^3.21.4"
+  },
+  "exports": {
+    "./*": "./dist/index.*.js"
+  },
+  "publishConfig": {
+    "typesVersions": {
+      "*": {
+        "*": [
+          "./dist/index.*.d.ts"
+        ]
+      }
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "client": [
+        "./src/client/index.client.tsx"
+      ],
+      "server": [
+        "./src/server/index.server.ts"
+      ]
+    }
   }
 }
