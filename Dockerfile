@@ -9,6 +9,8 @@ RUN yarn --frozen-lockfile
 RUN npm install -g turbo
 
 COPY . .
+
+RUN turbo --version
 RUN yarn build
 
 EXPOSE 3090 5090
