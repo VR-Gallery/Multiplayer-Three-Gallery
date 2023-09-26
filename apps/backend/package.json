@@ -8,7 +8,7 @@
     "dev": "tsup src/index.ts --format cjs --watch --onSuccess \"node dist/index.js\"",
     "lint": "tsc --noEmit && eslint \"src/**/*.ts*\"",
     "start": "node dist/index.js",
-    "test": "jest --detectOpenHandles"
+    "test": "jest"
   },
   "jest": {
     "preset": "jest-presets/jest/node"

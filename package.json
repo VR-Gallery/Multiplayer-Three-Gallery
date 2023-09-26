@@ -4,14 +4,15 @@
     "build": "yarn dotenv -e .env turbo run build --docker",
     "clean": "yarn dotenv -e .env turbo run clean",
     "dev": "yarn dotenv -e .env turbo run dev --concurrency=17 --no-cache --continue",
-    "format": "yarn dotenv -e .env prettier --write \"**/*.{ts,tsx,md}\"",
+    "format": "yarn dotenv -e .env prettier --write \"**/*.{ttests,tsx,md}\"",
     "lint": "yarn dotenv -e .env turbo run lint",
     "test": "yarn dotenv -e .env turbo run test",
     "start": "yarn dotenv -e .env turbo run start"
   },
   "devDependencies": {
     "prettier": "^2.7.1",
-    "turbo": "1.8.3"
+    "turbo": "1.8.3",
+    "husky": "^8.0.0"
   },
   "packageManager": "yarn@1.22.19",
   "workspaces": [
