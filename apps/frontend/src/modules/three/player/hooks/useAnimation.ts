@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { PlayerActionName } from "models";
+import { PlayerActionName } from "common-type";
 import { Vector3 } from "@react-three/fiber";
 import useAnimationFrame from "@/hooks/useAnimationFrame";
 

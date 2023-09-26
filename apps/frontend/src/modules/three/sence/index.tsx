@@ -4,7 +4,7 @@ import Gallery from "@/modules/three/gallery";
 import Player from "@/modules/three/player";
 import OtherPlayer from "@/modules/three/otherPlayer";
 import PictureFrame from "@/modules/three/pictureFrame";
-import { Player as TypePlayer } from "models";
+import { Player as TypePlayer } from "common-type";
 import { OrbitControls, CameraControls, Environment } from "@react-three/drei";
 import { socket } from "@/utils/socket";
 import { match, P } from "ts-pattern";

@@ -9,12 +9,12 @@ import React, {
 } from "react";
 import { Model as FemaleModel } from "./ModelFemale";
 import { Model as MaleModel } from "./ModelMale";
-import { PlayerActionName } from "models";
+import { PlayerActionName } from "common-type";
 
 import { Euler, useFrame, useThree } from "@react-three/fiber";
 import { CameraControls } from "@react-three/drei";
 import { socket } from "@/utils/socket";
-import { Player, PlayerModels } from "models";
+import { Player, PlayerModels } from "common-type";
 import useCamaeraControl from "./hooks/useCamaeraControl";
 import { ControlType } from "@/modules/three/sence";
 import useAnimation from "./hooks/useAnimation";

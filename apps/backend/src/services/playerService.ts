@@ -1,5 +1,5 @@
 import io from "@/server";
-import { Player } from "models";
+import { Player } from "common-type";
 import callOnInterval from "@utils/callOnInterval";
 const PysicalIntervalTime = 1000 / 20;
 const players = new Map<string, Player>();

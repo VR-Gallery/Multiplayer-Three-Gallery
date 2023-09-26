@@ -24,7 +24,7 @@
     "file-loader": "^6.2.0",
     "leva": "^0.9.35",
     "lodash": "^4.17.21",
-    "models": "*",
+    "common-type": "*",
     "next": "latest",
     "next-transpile-modules": "^10.0.0",
     "postcss": "^8.4.23",

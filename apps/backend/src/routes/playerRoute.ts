@@ -1,6 +1,6 @@
 import { Socket } from "socket.io";
 import playerService from "@services/playerService";
-import { Player, playerSchema } from "models";
+import { Player, playerSchema } from "common-type";
 import isValid from "@/utils/isValid";
 
 const registerPlayerHandlers = (socket: Socket) => {

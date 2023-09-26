@@ -1,7 +1,7 @@
 import React, { FC, MutableRefObject, useMemo, useState } from "react";
 import { Model as FemaleModel } from "@/modules/three/player/ModelFemale";
 import { Model as MaleModel } from "@/modules/three/player/ModelMale";
-import { PlayerActionName } from "models";
+import { PlayerActionName } from "common-type";
 
 import VideoScreen from "./VideoScreen";
 import NameDisplay from "./NameDisplay";

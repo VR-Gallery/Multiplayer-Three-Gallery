@@ -10,7 +10,7 @@ import { GLTF } from "three-stdlib";
 import model from "./assets/model-female.glb";
 import * as SkeletonUtils from "three/examples/jsm/utils/SkeletonUtils.js";
 import { useGraph } from "@react-three/fiber";
-import { PlayerActionName } from "models";
+import { PlayerActionName } from "common-type";
 
 type GLTFResult = GLTF & {
   nodes: {
