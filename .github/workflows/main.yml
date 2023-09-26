@@ -17,7 +17,7 @@ jobs:
   # 這個 workflow 只有一個 job，名稱為 "build"
   build:
     # 這個 job 會執行 gcp 上頭
-    runs-on: [self-hosted, linux, ARM64]
+    runs-on: [self-hosted, linux, x64]
 
     # 作為 Job 的一部分，Steps 會循序執行一連串的動作
     steps:
