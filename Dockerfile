@@ -8,9 +8,7 @@ COPY package.json yarn.lock ./
 RUN yarn --frozen-lockfile
 
 COPY . .
-RUN ls -l -a
-
-RUN yarn build
+RUN sudo yarn build-force
 
 EXPOSE 3090 5090
 
