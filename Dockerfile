@@ -7,8 +7,8 @@ COPY package.json yarn.lock ./
 
 RUN apk add --no-cache libc6-compat
 RUN yarn install 
-RUN npm install -g turbo
-RUN npm install -g tsup 
+RUN yarn global add turbo
+RUN yarn global add tsup 
 
 COPY . .
 
