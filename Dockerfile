@@ -12,7 +12,7 @@ RUN yarn global add tsup
 
 
 RUN ls -l ./node_modules
-RUN ls -l ./packages
+RUN ls -l /home/t110820046/project
 
 COPY . .
 
