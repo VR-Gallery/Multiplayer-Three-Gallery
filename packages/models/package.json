@@ -9,9 +9,9 @@
     "dist/**"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsup src/index.ts --format cjs",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
-    "dev": "tsc -w",
+    "dev": "tsup -w",
     "lint": "eslint \"src/**/*.ts*\"",
     "test": "jest"
   },
