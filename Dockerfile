@@ -8,6 +8,8 @@ COPY package.json yarn.lock ./
 RUN yarn --frozen-lockfile
 
 COPY . .
+RUN ls -l
+RUN ls -l /
 
 RUN yarn build
 
