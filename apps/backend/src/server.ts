@@ -5,7 +5,7 @@ const port = Number(process.env.BACKEND_PORT) || 6000;
 
 const httpServer = createServer((req: any, res: any) => {
   res.writeHead(200);
-  res.end("socket.io");
+  res.end("ok");
 });
 
 const frontendUrl = process.env.FRONTEND_URL || "http://localhost:3000";
