@@ -7,7 +7,8 @@
     "format": "yarn dotenv -e .env prettier --write \"**/*.{ttests,tsx,md}\"",
     "lint": "yarn dotenv -e .env turbo run lint",
     "test": "yarn dotenv -e .env turbo run test",
-    "start": "yarn dotenv -e .env turbo run start"
+    "start": "yarn dotenv -e .env turbo run start",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "prettier": "^2.7.1",
