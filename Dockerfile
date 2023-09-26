@@ -3,19 +3,15 @@ FROM node:18.18.0-alpine
 
 WORKDIR /home/t110820046/project
 
-COPY . .
 
 RUN apk add --no-cache libc6-compat
-RUN yarn install 
+
+COPY . .
+
 RUN yarn global add turbo
 RUN yarn global add tsup 
+RUN yarn install 
 
-
-RUN ls -l ./node_modules
-RUN ls -l /home/t110820046/project
-
-
-RUN turbo --version
 RUN yarn build
 
 EXPOSE 3090 5090

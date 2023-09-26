@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "build": "yarn dotenv -e .env turbo run build",
+    "build": "yarn dotenv -e .env turbo run build --docker",
     "clean": "yarn dotenv -e .env turbo run clean",
     "dev": "yarn dotenv -e .env turbo run dev --concurrency=17 --no-cache --continue",
     "format": "yarn dotenv -e .env prettier --write \"**/*.{ts,tsx,md}\"",
