@@ -1,6 +1,5 @@
 import { Server } from "socket.io";
 import { createServer } from "http";
-import { log } from "logger";
 
 const port = Number(process.env.BACKEND_PORT) || 6000;
 
@@ -14,6 +13,6 @@ const io = new Server(httpServer, {
 });
 
 httpServer.listen(port, () => {
-  log(`Listening to port ${port}`);
+  console.log(`Listening to port ${port}`);
 });
 export default io;

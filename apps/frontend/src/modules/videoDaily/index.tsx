@@ -1,4 +1,3 @@
-import { log } from "logger";
 import DailyIframe, { DailyCall, DailyEvent } from "@daily-co/daily-js";
 import { DailyProvider, useDaily } from "@daily-co/daily-react";
 import { useCallback, useEffect, useState, FC } from "react";
@@ -60,7 +59,7 @@ const DailyApp: FC<DailyAppType> = ({ children }) => {
 
       switch (callObject.meetingState()) {
         case "joined-meeting":
-          log("setIsJoined");
+          console.log("Joined meeting");
           break;
         case "left-meeting":
           callObject.destroy().then(() => {
@@ -68,7 +67,7 @@ const DailyApp: FC<DailyAppType> = ({ children }) => {
           });
           break;
         case "error":
-          log("error");
+          console.error("Error joining call");
           break;
         default:
           break;
