@@ -11,7 +11,7 @@
   "scripts": {
     "build": "tsup src/index.ts --format cjs",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
-    "dev": "tsup -w",
+    "dev": "tsup src/index.ts --format cjs --watch --onSuccess \"node dist/index.js\"",
     "lint": "eslint \"src/**/*.ts*\"",
     "test": "jest"
   },
