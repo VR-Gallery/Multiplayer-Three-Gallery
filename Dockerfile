@@ -9,7 +9,7 @@ RUN yarn --frozen-lockfile
 
 COPY . .
 RUN ls -l
-RUN ls -l /
+RUN ls -l /home
 
 RUN yarn build
 
