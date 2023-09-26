@@ -9,11 +9,9 @@ httpServer.prependListener("request", (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
 });
 
-const frontendUrl = process.env.FRONTEND_URL || "https://meta-gallery.art";
 const io = new Server(httpServer, {
   cors: {
-    origin: frontendUrl,
-    methods: ["GET", "POST"]
+    origin: "*",
   },
 });
 
