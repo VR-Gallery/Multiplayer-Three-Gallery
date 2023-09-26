@@ -8,7 +8,7 @@ const httpServer = createServer((req: any, res: any) => {
   res.end("ok");
 });
 
-const frontendUrl = process.env.FRONTEND_URL || "http://localhost:3000";
+const frontendUrl = process.env.FRONTEND_URL || "https://meta-gallery.art/";
 const io = new Server(httpServer, {
   cors: {
     origin: frontendUrl,
