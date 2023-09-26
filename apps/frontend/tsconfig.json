@@ -1,5 +1,8 @@
 {
+  "exclude": ["node_modules"],
   "extends": "tsconfig/nextjs.json",
+  "module": "commonjs",
+  "skipLibCheck": true,
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "dist",
@@ -11,7 +14,7 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "baseUrl": ".",
+    "baseUrl": "",
     "paths": {
       "@/*": ["src/*"],
       "@modules/*": ["src/modules/*"],
@@ -21,6 +24,5 @@
       "@styles/*": ["src/styles/*"]
     }
   },
-  "exclude": ["node_modules"],
   "include": ["src", "next-env.d.ts"]
 }
