@@ -8,6 +8,8 @@ COPY package.json yarn.lock ./
 RUN apk add --no-cache libc6-compat
 RUN yarn --frozen-lockfile
 RUN npm install -g turbo
+RUN npm install -g tsup 
+RUN npm install -g tsc
 
 COPY . .
 
