@@ -14,7 +14,7 @@ git checkout -b <branch_name> # 建立新的 branch 並切換到新的 branch
 ```
 完成後，要來開 PR
 Pull Request，相當於向所有人告知你完成了某個功能，並且請大家來檢查你的程式碼
-1. 打開 (Github 專案頁面)[https://github.com/SR0725/Multiplayer-Three-Gallery/pulls]
+1. 打開 [Github 專案頁面](https://github.com/SR0725/Multiplayer-Three-Gallery/pulls)
 ![Alt text](images/image.png)
 
 2. 點選 `New pull request`
