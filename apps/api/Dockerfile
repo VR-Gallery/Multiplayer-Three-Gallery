@@ -30,4 +30,4 @@ FROM node:16-alpine as runner
 WORKDIR /app
 COPY --from=sourcer /app/ .
 EXPOSE 6000
-CMD [ "node", "apps/api/dist/main.js" ]
+CMD [ "node", "apps/api/dist/index.js" ]
