@@ -1,19 +1,25 @@
-'use client'
+'use client';
 
-import { Three } from '@/helpers/components/Three'
-import dynamic from 'next/dynamic'
-import { Suspense } from 'react'
+import dynamic from 'next/dynamic';
+import { Suspense } from 'react';
+import { Perf } from 'r3f-perf';
+import { OrbitControls } from '@react-three/drei';
+import Floor from '@/components/gameObects/floor';
 
-const Dog = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Dog), { ssr: false })
+const Player = dynamic(() => import('@/components/gameObects/player'), {
+  ssr: false,
+});
 
 export default function Page() {
   return (
     <>
       <Suspense fallback={null}>
-        <Three>
-          <Dog scale={2} position={[0, -1.6, 0]} rotation={[0.0, -0.3, 0]} />
-        </Three>
+        <Perf />
+        <OrbitControls />
+        <Perf />
+        <Player scale={2} position={[0, -1.6, 0]} rotation={[0.0, -0.3, 0]} />
+        <Floor />
       </Suspense>
     </>
-  )
+  );
 }
