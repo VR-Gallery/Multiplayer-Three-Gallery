@@ -59,12 +59,26 @@ jobs:
             --image "gcr.io/$PROJECT_ID/web-$GCE_INSTANCE-image:$GITHUB_SHA" \
             --platform "managed" \
             --port 3000 \
+            --set-env-vars="ENV=DEV" \
+            --set-env-vars="BACKEND_PORT=6000" \
+            --set-env-vars="BACKEND_URL=https://api.meta-gallery.art/" \
+            --set-env-vars="FRONTEND_URL=https://meta-gallery.art/" \
+            --set-env-vars="NEXT_PUBLIC_BACKEND_URL=https://api.meta-gallery.art/" \
+            --set-env-vars="NEXT_PUBLIC_FRONTEND_URL=https://meta-gallery.art/" \
+            --set-env-vars="NEXT_PUBLIC_ENV=PROD" \
             --allow-unauthenticated
           gcloud run deploy "$BACKEND_SERVICE_NAME" \
             --region "$GCE_INSTANCE_ZONE" \
             --image "gcr.io/$PROJECT_ID/api-$GCE_INSTANCE-image:$GITHUB_SHA" \
             --platform "managed" \
             --port 6000 \
+            --set-env-vars="ENV=DEV" \
+            --set-env-vars="BACKEND_PORT=6000" \
+            --set-env-vars="BACKEND_URL=https://api.meta-gallery.art/" \
+            --set-env-vars="FRONTEND_URL=https://meta-gallery.art/" \
+            --set-env-vars="NEXT_PUBLIC_BACKEND_URL=https://api.meta-gallery.art/" \
+            --set-env-vars="NEXT_PUBLIC_FRONTEND_URL=https://meta-gallery.art/" \
+            --set-env-vars="NEXT_PUBLIC_ENV=PROD" \
             --allow-unauthenticated
 
       - name: Deploy Success
