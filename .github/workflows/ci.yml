@@ -42,31 +42,29 @@ jobs:
       # Build the Docker image
       - name: Build
         run: |-
-          docker build --tag "gcr.io/$PROJECT_ID/$GCE_INSTANCE-image:$GITHUB_SHA" .
+          docker build -f apps/web/Dockerfile . --tag "gcr.io/$PROJECT_ID/web-$GCE_INSTANCE-image:$GITHUB_SHA" --no-cache
+          docker build -f apps/api/Dockerfile . --tag "gcr.io/$PROJECT_ID/api-$GCE_INSTANCE-image:$GITHUB_SHA" --no-cache
 
       # Push the Docker image to Google Container Registry
       - name: Publish
         run: |-
-          docker push "gcr.io/$PROJECT_ID/$GCE_INSTANCE-image:$GITHUB_SHA"
+          docker push "gcr.io/$PROJECT_ID/web-$GCE_INSTANCE-image:$GITHUB_SHA"
+          docker push "gcr.io/$PROJECT_ID/api-$GCE_INSTANCE-image:$GITHUB_SHA"
 
       # Deploy the Docker image to Cloud Run
       - name: Deploy Frontend
         run: |-
           gcloud run deploy "$FRONTEND_SERVICE_NAME" \
             --region "$GCE_INSTANCE_ZONE" \
-            --image "gcr.io/$PROJECT_ID/$GCE_INSTANCE-image:$GITHUB_SHA" \
+            --image "gcr.io/$PROJECT_ID/web-$GCE_INSTANCE-image:$GITHUB_SHA" \
             --platform "managed" \
-            --port 3090 \
+            --port 3000 \
             --allow-unauthenticated
-
-      # Deploy the Docker image to Cloud Run
-      - name: Deploy Backend
-        run: |-
           gcloud run deploy "$BACKEND_SERVICE_NAME" \
             --region "$GCE_INSTANCE_ZONE" \
-            --image "gcr.io/$PROJECT_ID/$GCE_INSTANCE-image:$GITHUB_SHA" \
+            --image "gcr.io/$PROJECT_ID/api-$GCE_INSTANCE-image:$GITHUB_SHA" \
             --platform "managed" \
-            --port 5090 \
+            --port 6000 \
             --allow-unauthenticated
 
       - name: Deploy Success
