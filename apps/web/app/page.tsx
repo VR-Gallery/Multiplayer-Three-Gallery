@@ -2,18 +2,14 @@
 
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
-import { Perf } from 'r3f-perf';
 import { Environment, OrbitControls } from '@react-three/drei';
+import { Perf } from 'r3f-perf';
 
-const Player = dynamic(() => import('@/components/gameObects/player'), {
+const Player = dynamic(() => import('@/components/gameObjects/player'), {
   ssr: false,
 });
 
-const Floor = dynamic(() => import('@/components/gameObects/floor'), {
-  ssr: false,
-});
-
-const Gallery = dynamic(() => import('@/components/gameObects/gallery'), {
+const Gallery = dynamic(() => import('@/components/gameObjects/gallery'), {
   ssr: false,
 });
 
@@ -24,9 +20,7 @@ export default function Page() {
         <Perf />
         <Environment files='/sky.hdr' background={true} />
         <OrbitControls />
-        <Perf />
         <Player scale={2} position={[0, -1.6, 0]} rotation={[0.0, -0.3, 0]} />
-        <Floor position={[0, -1.6, 0]} />
         <Gallery />
       </Suspense>
     </>

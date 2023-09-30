@@ -28,12 +28,12 @@ export default function Player(props: JSX.IntrinsicElements['group']) {
     });
 
   const [cylindeRef, api] = useCylinder(() => ({
-    mass: 0,
+    mass: 1,
     fixedRotation: true,
-    position: [-4, 0.8, -2],
+    position: [-4, 2, -2],
     args: [0.1, 0.1, 0.9],
     material: {
-      friction: 0,
+      friction: 0.01,
     },
   }));
 
