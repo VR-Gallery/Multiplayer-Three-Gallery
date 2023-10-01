@@ -1,10 +1,11 @@
 'use client';
 
-import { useGLTF, useAnimations } from '@react-three/drei';
+import { useGLTF, useAnimations, CameraControls } from '@react-three/drei';
 import { useCylinder, useSphere } from '@react-three/cannon';
 import { useAnimationController } from '@/hooks/useAnimationController';
 import { ManModel, GLTFResult } from './components/Man';
-import { RefObject, useEffect } from 'react';
+import { RefObject, useEffect, useRef } from 'react';
+import { usePlayerControl } from './hooks/usePlayerControl';
 
 type ActionName = 'idle' | 'walk';
 type GLTFActions = Record<ActionName, THREE.AnimationAction>;
@@ -27,8 +28,10 @@ export default function Player(props: JSX.IntrinsicElements['group']) {
       },
     });
 
+  const cameraControlRef = useRef<CameraControls | null>(null);
+
   const [cylindeRef, api] = useCylinder(() => ({
-    mass: 1,
+    mass: 10,
     fixedRotation: true,
     position: [-4, 2, -2],
     args: [0.1, 0.1, 0.9],
@@ -37,31 +40,31 @@ export default function Player(props: JSX.IntrinsicElements['group']) {
     },
   }));
 
+  const { isFirstPerson, animation } = usePlayerControl({
+    playerPysicsApi: api,
+    cameraControlRef,
+  });
+
   useEffect(() => {
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'w') {
-        onChangeAction('walk');
-        api.velocity.set(0, 0, -10);
-      }
-    });
-    document.addEventListener('keyup', (e) => {
-      if (e.key === 'w') {
-        onChangeAction('idle');
-        api.velocity.set(0, 0, 0);
-      }
-    });
-  }, []);
+    if (playAction !== animation) {
+      onChangeAction(animation as ActionName);
+    }
+  }, [animation]);
 
   return (
-    <group ref={cylindeRef as RefObject<THREE.Group>}>
-      <ManModel
-        {...props}
-        scale={0.5}
-        position={[0, -0.4, 0]}
-        nodes={nodes}
-        materials={materials}
-        animationRef={ref}
-      />
-    </group>
+    <>
+      <CameraControls ref={cameraControlRef} makeDefault />
+      <group ref={cylindeRef as RefObject<THREE.Group>}>
+        <ManModel
+          {...props}
+          scale={0.5}
+          position={[0, -0.4, 0]}
+          nodes={nodes}
+          materials={materials}
+          animationRef={ref}
+          visible={!isFirstPerson}
+        />
+      </group>
+    </>
   );
 }

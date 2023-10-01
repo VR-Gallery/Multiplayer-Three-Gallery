@@ -26,6 +26,17 @@ export function useAnimationController<T extends GLTFActions>(
   const [playAction, setPlayAction] = useState<keyof T>(defaultAction);
   const [lastAction, setLastAction] = useState<keyof T>(defaultAction);
 
+  const onChangeAction = (action: keyof T) => {
+    setPlayAction(action);
+  };
+
+  useEffect(() => {
+    if (actions[defaultAction as string]) {
+      actions[defaultAction]?.reset();
+      actions[defaultAction]?.play();
+    }
+  }, [actions]);
+
   useEffect(() => {
     if (
       playAction !== lastAction &&
@@ -41,10 +52,6 @@ export function useAnimationController<T extends GLTFActions>(
       setLastAction(playAction);
     }
   }, [playAction, actions]);
-
-  const onChangeAction = (action: keyof T) => {
-    setPlayAction(action);
-  };
 
   return { ref, onChangeAction, playAction, lastAction };
 }

@@ -1,12 +1,11 @@
 'use client';
 
 import * as THREE from 'three';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import { useGLTF } from '@react-three/drei';
 import { GLTF, RGBELoader } from 'three-stdlib';
 import { useLoader } from '@react-three/fiber';
-import { usePlane, useTrimesh } from '@react-three/cannon';
-import { useControls } from 'leva';
+import { useColider } from './hooks/useColider';
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -85,6 +84,17 @@ type GLTFResult = GLTF & {
     Cube029: THREE.Mesh;
     Cube030: THREE.Mesh;
     Cube032: THREE.Mesh;
+    Cube031: THREE.Mesh;
+    Cube033: THREE.Mesh;
+    Cube034: THREE.Mesh;
+    Cube035: THREE.Mesh;
+    Cube036: THREE.Mesh;
+    Cube037: THREE.Mesh;
+    Cube038: THREE.Mesh;
+    Cube039: THREE.Mesh;
+    Cube040: THREE.Mesh;
+    Cube041: THREE.Mesh;
+    Cube042: THREE.Mesh;
   };
   materials: {
     深色水泥: THREE.MeshStandardMaterial;
@@ -115,35 +125,17 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
     });
   }, [texture]);
 
-  const { position } = useControls({
-    position: [-4.84, -1.49, -2.19],
-  });
-
-  // 設定模型的碰撞邊界
-  const [floorRef] = usePlane(() => ({
-    material: {
-      friction: 0.01,
-    },
-    position: position,
-    args: [20, 0.1, 20],
-    rotation: [-Math.PI / 2, 0, 0],
-  }));
+  useColider();
 
   return (
     <group {...props} dispose={null}>
-      <mesh
-        geometry={nodes.平面.geometry}
-        material={materials.淺色水泥}
-        ref={floorRef as any}
-      />
-      <mesh
-        geometry={nodes.平面_1.geometry}
-        material={materials.淺色水泥}
-        ref={floorRef as any}
-      />
+      <group position={[-4.84, -1.49, -2.19]}>
+        <mesh geometry={nodes.平面.geometry} material={materials.淺色水泥} />
+        <mesh geometry={nodes.平面_1.geometry} material={materials.淺色水泥} />
+      </group>
       <mesh
         geometry={nodes.stairs3t4.geometry}
-        material={materials.淺色水泥}
+        material={materials.深色水泥}
         position={[-14.94, -1.84, 0.74]}
         scale={[1.02, 1, 1]}
       />
@@ -344,7 +336,7 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
       />
       <mesh
         geometry={nodes.wall015.geometry}
-        material={materials.淺色水泥}
+        material={materials.深色水泥}
         position={[3.77, 1.45, 4.08]}
         rotation={[0, -Math.PI / 2, 0]}
         scale={[0.57, 1, 1.88]}
@@ -590,6 +582,63 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
         geometry={nodes.Cube032.geometry}
         material={materials.灰色漆包金屬}
         position={[-3.42, 0.32, -3.32]}
+      />
+      <mesh
+        geometry={nodes.Cube031.geometry}
+        material={materials.灰色漆包金屬}
+        position={[-10.86, 2.61, -8.89]}
+        rotation={[0, 0.32, 0]}
+      />
+      <mesh
+        geometry={nodes.Cube033.geometry}
+        material={materials.灰色漆包金屬}
+        position={[-4.59, 2.61, -11.33]}
+        rotation={[0, -1.24, 0]}
+      />
+      <mesh
+        geometry={nodes.Cube034.geometry}
+        material={materials.灰色漆包金屬}
+        position={[-3.42, 2.61, -3.65]}
+      />
+      <mesh
+        geometry={nodes.Cube035.geometry}
+        material={materials.灰色漆包金屬}
+        position={[-3.42, 0.32, -6.1]}
+      />
+      <mesh
+        geometry={nodes.Cube036.geometry}
+        material={materials.灰色漆包金屬}
+        position={[0.41, 0.32, -6.14]}
+      />
+      <mesh
+        geometry={nodes.Cube037.geometry}
+        material={materials.灰色漆包金屬}
+        position={[-0.57, 0.32, -6.13]}
+      />
+      <mesh
+        geometry={nodes.Cube038.geometry}
+        material={materials.灰色漆包金屬}
+        position={[-1.55, 0.32, -6.12]}
+      />
+      <mesh
+        geometry={nodes.Cube039.geometry}
+        material={materials.灰色漆包金屬}
+        position={[1.38, 0.32, -6.16]}
+      />
+      <mesh
+        geometry={nodes.Cube040.geometry}
+        material={materials.灰色漆包金屬}
+        position={[2.36, 0.32, -6.17]}
+      />
+      <mesh
+        geometry={nodes.Cube041.geometry}
+        material={materials.灰色漆包金屬}
+        position={[-2.52, 0.32, -6.12]}
+      />
+      <mesh
+        geometry={nodes.Cube042.geometry}
+        material={materials.灰色漆包金屬}
+        position={[-3.42, 1.15, -6.1]}
       />
     </group>
   );
