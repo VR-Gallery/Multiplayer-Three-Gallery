@@ -14,17 +14,22 @@ git checkout -b <branch_name> # 建立新的 branch 並切換到新的 branch
 ```
 完成後，要來開 PR
 Pull Request，相當於向所有人告知你完成了某個功能，並且請大家來檢查你的程式碼
-1. 打開 (Github 專案頁面)[https://github.com/SR0725/Multiplayer-Three-Gallery/pulls]
+1. 打開 [Github 專案頁面](https://github.com/SR0725/Multiplayer-Three-Gallery/pulls)
 ![Alt text](images/image.png)
 
-2. 點選 `New pull request`
+2. 點選 [![`New pull request`](https://github.com/kryr34/Multiplayer-Three-Gallery/assets/78149128/3845cd3b-425d-476b-ab77-e5a4560302cb)](https://github.com/SR0725/Multiplayer-Three-Gallery/compare)
+
 ![Alt text](images/image2.png)
 確認上方的 `compare` 是你剛剛開發的 branch，旁邊的 `base` 是 main branch
-3. 點選 `Create pull request`
 
-4. 輸入 PR 的標題和內容，並且點選 `Create pull request`
+3. 點選 ![`Create pull request`](https://github.com/kryr34/Multiplayer-Three-Gallery/assets/78149128/5ad7d8e3-dd57-4009-ad29-6e811ae03f12)
 
-5. 叫其他人幫你看 PR，如果確定沒問題，就可以點選 `Merge pull request`，並且刪除這個 branch
+
+4. 輸入 PR 的標題和內容，並且點選 ![`Create pull request`](https://github.com/kryr34/Multiplayer-Three-Gallery/assets/78149128/f94876f5-f4c3-4ed6-8c69-029183045d49)
+
+
+5. 叫其他人幫你看 PR，如果確定沒問題，就可以點選 ![`Merge pull request`](https://github.com/kryr34/Multiplayer-Three-Gallery/assets/78149128/268dcf2f-be36-4fd0-ae66-b7e6ea4801bf)
+，並且刪除這個 branch
 
 如果要開發新的功能，請重複上述步驟
 ## Install
@@ -92,3 +97,4 @@ Pull Request，相當於向所有人告知你完成了某個功能，並且請�
         \- [hooks名稱]
             \- index.tsx
 ```
+
