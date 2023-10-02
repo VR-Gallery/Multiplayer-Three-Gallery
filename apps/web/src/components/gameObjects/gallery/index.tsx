@@ -95,6 +95,7 @@ type GLTFResult = GLTF & {
     Cube040: THREE.Mesh;
     Cube041: THREE.Mesh;
     Cube042: THREE.Mesh;
+    wall005: THREE.Mesh;
   };
   materials: {
     深色水泥: THREE.MeshStandardMaterial;
@@ -104,7 +105,7 @@ type GLTFResult = GLTF & {
   };
 };
 
-export default function Model(props: JSX.IntrinsicElements['group']) {
+export default function Gallery(props: JSX.IntrinsicElements['group']) {
   const texture = useLoader(RGBELoader, '/sky.hdr');
   const { nodes, materials } = useGLTF(
     '/gallery-transformed.glb',
@@ -639,6 +640,12 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
         geometry={nodes.Cube042.geometry}
         material={materials.灰色漆包金屬}
         position={[-3.42, 1.15, -6.1]}
+      />
+      <mesh
+        geometry={nodes.wall005.geometry}
+        material={materials.淺色水泥}
+        position={[13.64, 1.45, -5.15]}
+        scale={[0.57, 1, 0.77]}
       />
     </group>
   );
