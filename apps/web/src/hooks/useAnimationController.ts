@@ -35,7 +35,7 @@ export function useAnimationController<T extends GLTFActions>(
       actions[defaultAction]?.reset();
       actions[defaultAction]?.play();
     }
-  }, [actions]);
+  }, [actions, defaultAction]);
 
   useEffect(() => {
     if (
@@ -51,7 +51,7 @@ export function useAnimationController<T extends GLTFActions>(
       actions[playAction]?.play();
       setLastAction(playAction);
     }
-  }, [playAction, actions]);
+  }, [playAction, actions, lastAction, config]);
 
   return { ref, onChangeAction, playAction, lastAction };
 }

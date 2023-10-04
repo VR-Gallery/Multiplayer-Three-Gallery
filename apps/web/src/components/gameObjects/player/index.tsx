@@ -1,16 +1,17 @@
 'use client';
 
-import { useGLTF, useAnimations, CameraControls } from '@react-three/drei';
-import { useCylinder, useSphere } from '@react-three/cannon';
+import { useGLTF, CameraControls } from '@react-three/drei';
+import { useCylinder } from '@react-three/cannon';
 import { useAnimationController } from '@/hooks/useAnimationController';
 import { ManModel, GLTFResult } from './components/Man';
-import { RefObject, useEffect, useRef } from 'react';
+import { FC, RefObject, useEffect, useRef } from 'react';
 import { usePlayerControl } from './hooks/usePlayerControl';
+import { Group } from 'three';
 
 type ActionName = 'idle' | 'walk';
 type GLTFActions = Record<ActionName, THREE.AnimationAction>;
 
-export default function Player(props: JSX.IntrinsicElements['group']) {
+const Player: FC<JSX.IntrinsicElements['group']> = (props) => {
   const { nodes, materials, animations } = useGLTF(
     '/player/man.glb',
   ) as unknown as GLTFResult;
@@ -54,7 +55,7 @@ export default function Player(props: JSX.IntrinsicElements['group']) {
   return (
     <>
       <CameraControls ref={cameraControlRef} makeDefault />
-      <group ref={cylindeRef as RefObject<THREE.Group>}>
+      <group ref={cylindeRef as RefObject<Group>}>
         <ManModel
           {...props}
           scale={0.5}
@@ -67,4 +68,6 @@ export default function Player(props: JSX.IntrinsicElements['group']) {
       </group>
     </>
   );
-}
+};
+
+export default Player;

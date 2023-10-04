@@ -9,14 +9,14 @@ import {
   MenuItem,
   Avatar,
 } from "@material-tailwind/react";
-import {
-  UserCircleIcon,
-  ChevronDownIcon,
-  Cog6ToothIcon,
-  InboxArrowDownIcon,
-  LifebuoyIcon,
-  PowerIcon,
-} from "@heroicons/react/24/outline";
+// import {
+//   UserCircleIcon,
+//   ChevronDownIcon,
+//   Cog6ToothIcon,
+//   InboxArrowDownIcon,
+//   LifebuoyIcon,
+//   PowerIcon,
+// } from "@heroicons/react/24/outline";
 import { P, match } from "ts-pattern";
 import HairCheck from "@modules/videoDaily/HairCheck/HairCheck";
 import VideoDollyTray from "@modules/videoDaily/Tray/Tray";
@@ -27,23 +27,23 @@ import classNames from "classnames";
 const profileMenuItems = [
   {
     label: "My Profile",
-    icon: UserCircleIcon,
+    icon: 'UserCircleIcon',
   },
   {
     label: "Edit Profile",
-    icon: Cog6ToothIcon,
+    icon: 'Cog6ToothIcon',
   },
   {
     label: "Inbox",
-    icon: InboxArrowDownIcon,
+    icon: 'InboxArrowDownIcon',
   },
   {
     label: "Help",
-    icon: LifebuoyIcon,
+    icon: 'LifebuoyIcon',
   },
   {
     label: "Sign Out",
-    icon: PowerIcon,
+    icon: 'PowerIcon',
   },
 ];
 
@@ -66,12 +66,12 @@ const ProfileMenu: FC = () => {
             className="border border-blue-500 p-0.5"
             src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
           />
-          <ChevronDownIcon
+          {/* <ChevronDownIcon
             strokeWidth={2.5}
             className={`h-3 w-3 transition-transform ${
               isMenuOpen ? "rotate-180" : ""
             }`}
-          />
+          /> */}
         </Button>
       </MenuHandler>
       <MenuList className="p-1">

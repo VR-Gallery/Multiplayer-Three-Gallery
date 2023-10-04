@@ -124,7 +124,7 @@ export default function Gallery(props: JSX.IntrinsicElements['group']) {
     Object.values(materials).forEach((material) => {
       material.envMap = texture;
     });
-  }, [texture]);
+  }, [materials, texture]);
 
   useColider();
 

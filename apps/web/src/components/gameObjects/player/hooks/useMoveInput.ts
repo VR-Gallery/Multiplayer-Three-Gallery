@@ -66,7 +66,7 @@ export const useMoveInput = ({
     return () => {
       window.removeEventListener('wheel', handleWheel);
     };
-  }, []);
+  }, [maxCameraDistance, minCameraDistance]);
 
   return {
     goForward,
