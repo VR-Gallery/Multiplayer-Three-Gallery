@@ -1,8 +1,7 @@
 # base image
 FROM node:18.18.0-alpine
 
-WORKDIR /home/t110820046/project
-
+WORKDIR /app
 
 RUN apk add --no-cache libc6-compat
 
