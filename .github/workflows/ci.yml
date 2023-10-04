@@ -1,4 +1,4 @@
-name: gallery
+name: gallery-ci
 
 on:
   pull_request:
@@ -13,8 +13,8 @@ env:
   BACKEND_SERVICE_NAME: gallery-backend
 
 jobs:
-  build-and-deploy:
-    name: Setup, Build, and Deploy
+  build:
+    name: Build
     runs-on: ubuntu-latest
     timeout-minutes: 15
 

@@ -1,4 +1,4 @@
-name: gallery
+name: gallery-cd
 
 on:
   push:
