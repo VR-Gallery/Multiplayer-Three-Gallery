@@ -8,7 +8,8 @@
     "dev": "next dev -p 3090",
     "lint": "next lint",
     "start": "next start -p 3090",
-    "test": "jest"
+    "test": "jest",
+    "type": "tsc --noEmit"
   },
   "dependencies": {
     "@daily-co/daily-js": "^0.44.1",
