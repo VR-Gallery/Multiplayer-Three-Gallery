@@ -47,7 +47,7 @@ export const useArtworkEditor = (
       rotation: rotation as Vector3Tuple,
       scale: scale as Vector3Tuple,
     });
-  }, [url, position, rotation, scale]);
+  }, [url, position, rotation, scale, setArtworkData, artworkData]);
 
   return null;
 };

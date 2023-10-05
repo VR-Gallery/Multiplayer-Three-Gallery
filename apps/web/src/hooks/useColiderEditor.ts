@@ -31,18 +31,17 @@ export const useColiderEditor = (
             v ? Number(v.toFixed(4)) : 0,
           ),
         }).slice(1, -1) + ',';
-      console.log(text);
       navigator.clipboard.writeText(text);
     }),
   });
 
   useEffect(() => {
     api.position.set(...position);
-  }, [position]);
+  }, [api.position, position]);
 
   useEffect(() => {
     api.rotation.set(...rotation);
-  }, [rotation]);
+  }, [api.rotation, rotation]);
 
   return null;
 };

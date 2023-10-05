@@ -167,6 +167,7 @@ const HairCheck: FC = () => {
         variant="standard"
         onChange={onNameChange}
         value={localParticipant?.user_name || " "}
+        crossOrigin="anonymous"
       />
 
       {mediaErrorMessages && (

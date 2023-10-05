@@ -16,15 +16,13 @@ const Gallery = dynamic(() => import('@/components/gameObjects/gallery'), {
 
 export default function Page() {
   return (
-    <>
-      <Suspense fallback={null}>
-        {/* <Perf /> */}
-        <Environment files='/sky.hdr' background={true} />
-        {/* <OrbitControls /> */}
-        <Artworks />
-        <Player scale={2} position={[0, -1.6, 0]} rotation={[0.0, -0.3, 0]} />
-        <Gallery />
-      </Suspense>
-    </>
+    <Suspense fallback={null}>
+      {/* <Perf /> */}
+      <Environment files='/sky.hdr' background={true} />
+      {/* <OrbitControls /> */}
+      <Artworks />
+      <Player scale={2} position={[0, -1.6, 0]} rotation={[0.0, -0.3, 0]} />
+      <Gallery />
+    </Suspense>
   );
 }

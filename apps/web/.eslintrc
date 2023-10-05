@@ -1,7 +1,7 @@
 {
   "extends": [
-    "next",
-    "prettier",
+    "custom",
+    "plugin:react-hooks/recommended",
     "plugin:tailwindcss/recommended",
     "plugin:prettier/recommended"
   ],
@@ -11,5 +11,5 @@
     "no-var": "error",
     "no-html-link-for-pages": "off"
   },
-  "plugins": ["tailwindcss"]
+  "plugins": ["prettier", "tailwindcss"]
 }
