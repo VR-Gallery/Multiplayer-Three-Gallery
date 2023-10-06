@@ -1121,6 +1121,14 @@
     fast-equals "^1.6.3"
     lodash "^4.17.15"
 
+"@daily-co/daily-react@^0.12.0":
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/@daily-co/daily-react/-/daily-react-0.12.0.tgz#b4a97d897ca37005d5371e0cf6d5fb597b75d242"
+  integrity sha512-PUH1hm8WkEmzqfEKegLePL+gPS7A8pY4rmoTNq0SwsmPWtpNwdZNRjNa0BaU5RpEjyZeROle929K4sxWz/nwoA==
+  dependencies:
+    fast-deep-equal "^3.1.3"
+    lodash.throttle "^4.1.1"
+
 "@daily-co/daily-react@^0.8.0":
   version "0.8.0"
   resolved "https://registry.yarnpkg.com/@daily-co/daily-react/-/daily-react-0.8.0.tgz#438827d3e21a4866355f2e05f15ca3457f74bac1"
@@ -8607,7 +8615,7 @@ socket.io-adapter@~2.5.2:
   dependencies:
     ws "~8.11.0"
 
-socket.io-client@^4.6.1:
+socket.io-client@^4.6.1, socket.io-client@^4.7.2:
   version "4.7.2"
   resolved "https://registry.yarnpkg.com/socket.io-client/-/socket.io-client-4.7.2.tgz#f2f13f68058bd4e40f94f2a1541f275157ff2c08"
   integrity sha512-vtA0uD4ibrYD793SOIAwlo8cj6haOeMHrGvwPxJsxH7CeIksqJ+3Zc06RvWTIFgiSqx4A3sOnTXpfAEE2Zyz6w==

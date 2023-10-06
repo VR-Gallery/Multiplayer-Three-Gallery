@@ -1,5 +1,4 @@
 {
-
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
@@ -7,7 +6,9 @@
         "app/*",
         "src/*"
       ],
-      "react": [ "./node_modules/@types/react" ]
+      "react": [
+        "./node_modules/@types/react"
+      ]
     },
     "target": "es5",
     "lib": [
