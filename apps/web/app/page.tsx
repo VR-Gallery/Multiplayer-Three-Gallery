@@ -37,7 +37,6 @@ const useOtherPlayersUpdate = () => {
 
 export default function Page() {
   const otherPlayers = useOtherPlayersUpdate();
-  console.log(otherPlayers);
 
   return (
     <Suspense fallback={null}>
