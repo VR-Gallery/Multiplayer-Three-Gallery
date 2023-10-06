@@ -19,7 +19,7 @@ export const Artwork = (props: Props) => {
 
   return (
     <mesh {...props} ref={ref}>
-      <planeBufferGeometry
+      <planeGeometry
         args={[width / pixelPerMeter, height / pixelPerMeter, 1, 1]}
       />
       <meshBasicMaterial map={texture} />
