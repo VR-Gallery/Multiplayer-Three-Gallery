@@ -29,5 +29,5 @@ RUN yarn turbo run build --scope=api --include-dependencies --no-deps
 FROM node:16-alpine as runner
 WORKDIR /app
 COPY --from=sourcer /app/ .
-EXPOSE 6000
+EXPOSE 6001
 CMD [ "node", "apps/api/dist/index.js" ]

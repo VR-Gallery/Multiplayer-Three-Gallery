@@ -1,7 +1,7 @@
 import { Server } from "socket.io";
 import { createServer } from "http";
 
-const port = Number(process.env.BACKEND_PORT) || 6000;
+const port = Number(process.env.BACKEND_PORT) || 6001;
 
 const httpServer = createServer();
 

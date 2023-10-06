@@ -60,7 +60,7 @@ jobs:
             --platform "managed" \
             --port 3000 \
             --set-env-vars="ENV=DEV" \
-            --set-env-vars="BACKEND_PORT=6000" \
+            --set-env-vars="BACKEND_PORT=6001" \
             --set-env-vars="BACKEND_URL=https://api.meta-gallery.art/" \
             --set-env-vars="FRONTEND_URL=https://meta-gallery.art/" \
             --set-env-vars="NEXT_PUBLIC_BACKEND_URL=https://api.meta-gallery.art/" \
@@ -71,9 +71,9 @@ jobs:
             --region "$GCE_INSTANCE_ZONE" \
             --image "gcr.io/$PROJECT_ID/api-$GCE_INSTANCE-image:$GITHUB_SHA" \
             --platform "managed" \
-            --port 6000 \
+            --port 6001 \
             --set-env-vars="ENV=DEV" \
-            --set-env-vars="BACKEND_PORT=6000" \
+            --set-env-vars="BACKEND_PORT=6001" \
             --set-env-vars="BACKEND_URL=https://api.meta-gallery.art/" \
             --set-env-vars="FRONTEND_URL=https://meta-gallery.art/" \
             --set-env-vars="NEXT_PUBLIC_BACKEND_URL=https://api.meta-gallery.art/" \
