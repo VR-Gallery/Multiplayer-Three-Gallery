@@ -8,7 +8,8 @@
     "lint": "yarn dotenv -e .env turbo run lint",
     "test": "yarn dotenv -e .env turbo run test",
     "start": "yarn dotenv -e .env turbo run start",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "type": "yarn dotenv -e .env turbo run type"
   },
   "devDependencies": {
     "husky": "^8.0.0",

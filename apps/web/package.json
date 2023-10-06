@@ -14,6 +14,7 @@
     "@react-three/cannon": "^6.6.0",
     "@react-three/drei": "^9.68.3",
     "@react-three/fiber": "^8.13.0",
+    "@types/three": "^0.152.0",
     "autoprefixer": "^10.4.16",
     "eslint": "^8.50.0",
     "eslint-plugin-prettier": "^5.0.0",
@@ -21,7 +22,7 @@
     "glsl-random": "^0.0.5",
     "leva": "^0.9.35",
     "lil-gui": "^0.18.2",
-    "next": "^13.4.13",
+    "next": "^13.5.4",
     "prettier": "^3.0.3",
     "prettier-plugin-tailwindcss": "^0.5.4",
     "react": "^18.2.0",
@@ -58,6 +59,7 @@
     "start": "next start",
     "prettier": "npx prettier --list-different \"./src/**/*.{ts,tsx,md}\" \"./app/**/*.{ts,tsx,md}\"\"",
     "clean": "rm -rf .next",
-    "test": "jest"
+    "test": "jest",
+    "type": "tsc -p tsconfig.json"
   }
 }

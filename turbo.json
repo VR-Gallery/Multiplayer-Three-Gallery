@@ -45,6 +45,7 @@
     "start": {
       "dependsOn": ["build"],
       "cache": false
-    }
+    },
+    "type": {}
   }
 }
