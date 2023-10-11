@@ -1,9 +1,6 @@
 name: gallery-ci
 
-on:
-  pull_request:
-    branches:
-      - main
+on: [pull_request]
 
 env:
   PROJECT_ID: test-id-for-ci
