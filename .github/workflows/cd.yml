@@ -1,0 +1,106 @@
+name: gallery-cd
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  PROJECT_ID: ${{ secrets.GCE_PROJECT }}
+  GCE_INSTANCE: instance-1
+  GCE_INSTANCE_ZONE: asia-east1
+  FRONTEND_SERVICE_NAME: gallery-frontend
+  BACKEND_SERVICE_NAME: gallery-backend
+
+jobs:
+  build-and-deploy:
+    name: Setup, Build, and Deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - id: "auth"
+        uses: "google-github-actions/auth@v1"
+        with:
+          credentials_json: "${{ secrets.GCP_CREDENTIALS }}"
+
+      - name: "Set up Cloud SDK"
+        uses: "google-github-actions/setup-gcloud@v1"
+
+      - name: "Use gcloud CLI"
+        run: "gcloud info"
+
+      - name: Enable the necessary APIs and enable docker auth
+        run: |-
+          gcloud services enable containerregistry.googleapis.com
+          gcloud services enable run.googleapis.com
+          gcloud --quiet auth configure-docker
+
+      # Build the Docker image
+      - name: Build
+        run: |-
+          docker build -f apps/web/Dockerfile . --tag "gcr.io/$PROJECT_ID/web-$GCE_INSTANCE-image:$GITHUB_SHA" --no-cache
+          docker build -f apps/api/Dockerfile . --tag "gcr.io/$PROJECT_ID/api-$GCE_INSTANCE-image:$GITHUB_SHA" --no-cache
+
+      # Push the Docker image to Google Container Registry
+      - name: Publish
+        run: |-
+          docker push "gcr.io/$PROJECT_ID/web-$GCE_INSTANCE-image:$GITHUB_SHA"
+          docker push "gcr.io/$PROJECT_ID/api-$GCE_INSTANCE-image:$GITHUB_SHA"
+
+      # Deploy the Docker image to Cloud Run
+      - name: Deploy Frontend
+        run: |-
+          gcloud run deploy "$FRONTEND_SERVICE_NAME" \
+            --region "$GCE_INSTANCE_ZONE" \
+            --image "gcr.io/$PROJECT_ID/web-$GCE_INSTANCE-image:$GITHUB_SHA" \
+            --platform "managed" \
+            --port 3000 \
+            --set-env-vars="ENV=DEV" \
+            --set-env-vars="BACKEND_PORT=6001" \
+            --set-env-vars="BACKEND_URL=https://api.meta-gallery.art/" \
+            --set-env-vars="FRONTEND_URL=https://meta-gallery.art/" \
+            --set-env-vars="NEXT_PUBLIC_BACKEND_URL=https://api.meta-gallery.art/" \
+            --set-env-vars="NEXT_PUBLIC_FRONTEND_URL=https://meta-gallery.art/" \
+            --set-env-vars="NEXT_PUBLIC_ENV=PROD" \
+            --allow-unauthenticated
+          gcloud run deploy "$BACKEND_SERVICE_NAME" \
+            --region "$GCE_INSTANCE_ZONE" \
+            --image "gcr.io/$PROJECT_ID/api-$GCE_INSTANCE-image:$GITHUB_SHA" \
+            --platform "managed" \
+            --port 6001 \
+            --set-env-vars="ENV=DEV" \
+            --set-env-vars="BACKEND_PORT=6001" \
+            --set-env-vars="BACKEND_URL=https://api.meta-gallery.art/" \
+            --set-env-vars="FRONTEND_URL=https://meta-gallery.art/" \
+            --set-env-vars="NEXT_PUBLIC_BACKEND_URL=https://api.meta-gallery.art/" \
+            --set-env-vars="NEXT_PUBLIC_FRONTEND_URL=https://meta-gallery.art/" \
+            --set-env-vars="NEXT_PUBLIC_ENV=PROD" \
+            --allow-unauthenticated
+
+      - name: Deploy Success
+        uses: rjstone/discord-webhook-notify@v1
+        if: success()
+        with:
+            severity: info
+            details: 部屬成功
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+            
+      - name: Deploy Failure
+        uses: rjstone/discord-webhook-notify@v1
+        if: failure()
+        with:
+            severity: error
+            details: 部屬失敗
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
+      - name: Deploy Cancelled
+        uses: rjstone/discord-webhook-notify@v1
+        if: cancelled()
+        with:
+            severity: warn
+            details: 部屬取消
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
