@@ -36,7 +36,8 @@
     "socket.io-client": "^4.7.2",
     "three": "^0.152.0",
     "three-stdlib": "^2.24.2",
-    "tunnel-rat": "^0.1.2"
+    "tunnel-rat": "^0.1.2",
+    "zustand": "^4.4.3"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^13.4.13",

@@ -10,6 +10,7 @@ import { Group, Quaternion, Vector3 } from 'three';
 import { useFrame, useGraph } from '@react-three/fiber';
 import { SkeletonUtils } from 'three-stdlib';
 import { socket } from '@/utils/socket';
+import { usePlayerEventHandler } from './hooks/usePlayerEventHandler';
 
 type ActionName = 'idle' | 'walk';
 type GLTFActions = Record<ActionName, THREE.AnimationAction>;
@@ -50,6 +51,8 @@ const Player: FC<JSX.IntrinsicElements['group']> = (props) => {
     playerPysicsApi: api,
     cameraControlRef,
   });
+
+  usePlayerEventHandler(api);
 
   useEffect(() => {
     if (playAction !== animation) {
