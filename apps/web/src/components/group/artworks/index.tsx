@@ -1,7 +1,4 @@
 import { Artwork } from '@/components/gameObjects/artwork';
-import { useArtworkEditor } from './hooks/useArtworkEditor';
-import { useState } from 'react';
-import { Euler, Vector3 } from '@react-three/fiber';
 
 export type ArtworkData = {
   url: string;
@@ -83,6 +80,12 @@ const artworks: ArtworkData[] = [
     rotation: [0, 1.575, 0],
     scale: [0.5, 0.5, 1],
     url: '/artworks/四季運作_春.jpg',
+  },
+  {
+    position: [0, 1.6, 1.3],
+    rotation: [0, 3.14, 0],
+    scale: [0.8, 0.8, 1],
+    url: '/artworks/翻案屋.jpg',
   },
 ];
 

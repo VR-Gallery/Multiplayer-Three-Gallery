@@ -6,6 +6,7 @@ import { Environment, OrbitControls } from '@react-three/drei';
 import { Artworks } from '@/components/group/artworks';
 import { socket } from '@/utils/socket';
 import OtherPlayer from '@/components/gameObjects/otherPlayer';
+import { ArtworkWithGuide } from '@/components/gameObjects/artworkWithGuide';
 
 const Player = dynamic(() => import('@/components/gameObjects/player'), {
   ssr: false,
@@ -18,6 +19,7 @@ const Gallery4F = dynamic(() => import('@/components/gameObjects/gallery_4f'), {
 const Gallery1F = dynamic(() => import('@/components/gameObjects/gallery_1f'), {
   ssr: false,
 });
+
 const Teleportation = dynamic(
   () =>
     import('@/components/gameObjects/teleportation').then(
@@ -53,11 +55,12 @@ export default function Page() {
     <Suspense fallback={null}>
       {/* <Perf /> */}
       <Environment files='/sky.hdr' background={true} />
-      {/* <OrbitControls position={[100, 0, 100]} /> */}
+      <OrbitControls position={[100, 0, 100]} />
       <Artworks />
       <Player scale={2} position={[0, -1.6, 0]} rotation={[0.0, -0.3, 0]} />
       <Gallery4F position={[0, 0, 0]} />
       <Gallery1F position={[100, 0, 100]} scale={0.5} />
+      <ArtworkWithGuide />
       <Teleportation
         position={[3, 1.2, -0.5]}
         fontScale={0.2}
