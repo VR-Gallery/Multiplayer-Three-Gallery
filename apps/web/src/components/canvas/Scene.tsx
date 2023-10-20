@@ -7,7 +7,11 @@ import { Physics, Debug } from '@react-three/cannon';
 export default function Scene({ children, ...props }: CanvasProps) {
   return (
     <Canvas {...props}>
-      <Physics>{children}</Physics>
+      <Physics>
+        {/* <Debug color='black'> */}
+        {children}
+        {/* </Debug> */}
+      </Physics>
       <Preload all />
     </Canvas>
   );

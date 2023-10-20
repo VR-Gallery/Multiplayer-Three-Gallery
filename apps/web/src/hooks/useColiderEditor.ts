@@ -4,7 +4,6 @@ import { RefObject, useEffect } from 'react';
 import { Object3D, Event, Vector3Tuple } from 'three';
 
 export const useColiderEditor = (
-  ref: RefObject<Object3D<Event>>,
   api: PublicApi,
   defaultValue?: {
     position: Vector3Tuple;
