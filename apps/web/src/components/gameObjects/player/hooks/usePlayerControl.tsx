@@ -5,7 +5,7 @@ import { MutableRefObject, useRef } from 'react';
 import { Vector3 } from 'three';
 import { useMoveInput } from './useMoveInput';
 
-const Speed = 100;
+const Speed = 500;
 const CameraStep = 0.1;
 
 type Props = {

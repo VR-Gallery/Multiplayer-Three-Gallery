@@ -7,6 +7,13 @@ import { Artworks } from '@/components/group/artworks';
 import { socket } from '@/utils/socket';
 import OtherPlayer from '@/components/gameObjects/otherPlayer';
 import { ArtworkWithGuide } from '@/components/gameObjects/artworkWithGuide';
+import { ArtworkWithGuide111AC8001 } from '@/components/gameObjects/artworkWithGuide111AC8001';
+import { ArtworkWithGuide111C52004 } from '@/components/gameObjects/artworkWithGuide111C52004';
+import { ArtworkWithGuide111C52006 } from '@/components/gameObjects/artworkWithGuide111C52006';
+import { ArtworkWithGuide111C52018 } from '@/components/gameObjects/artworkWithGuide111C52018';
+import { ArtworkWithGuide111C52029 } from '@/components/gameObjects/artworkWithGuide111C52029';
+import { ArtworkWithGuide111C52014 } from '@/components/gameObjects/artworkWithGuide111C52014';
+import { ArtworkWithGuide111C52030 } from '@/components/gameObjects/artworkWithGuide111C52030';
 
 const Player = dynamic(() => import('@/components/gameObjects/player'), {
   ssr: false,
@@ -61,6 +68,12 @@ export default function Page() {
       <Gallery4F position={[0, 0, 0]} />
       <Gallery1F position={[100, 0, 100]} scale={0.5} />
       <ArtworkWithGuide />
+      <ArtworkWithGuide111AC8001 />
+      <ArtworkWithGuide111C52004 />
+      <ArtworkWithGuide111C52006 />
+      <ArtworkWithGuide111C52018 />
+      <ArtworkWithGuide111C52029 />
+      <ArtworkWithGuide111C52030 />
       <Teleportation
         position={[3, 1.2, -0.5]}
         fontScale={0.2}

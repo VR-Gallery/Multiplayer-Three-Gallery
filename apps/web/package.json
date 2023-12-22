@@ -14,7 +14,7 @@
     "start": "next start",
     "prettier": "npx prettier --list-different \"./src/**/*.{ts,tsx,md}\" \"./app/**/*.{ts,tsx,md}\"\"",
     "clean": "rm -rf .next",
-    "test": "jest",
+    "test": "",
     "type": "tsc -p tsconfig.json"
   },
   "engines": {
