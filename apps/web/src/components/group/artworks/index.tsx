@@ -10,28 +10,10 @@ export type ArtworkData = {
 
 const artworks: ArtworkData[] = [
   {
-    position: [-2.7, 1.6, 1.2],
-    rotation: [0, 1.57, 0],
-    scale: [0.8, 0.8, 1],
-    url: '/artworks/瀑台雙鹿圖.jpg',
-  },
-  {
-    position: [0.05, 1.5, -1.6],
-    rotation: [0, 3.14, 0],
-    scale: [1, 1, 1],
-    url: '/artworks/奇妙之光.jpg',
-  },
-  {
     position: [2.575, 1.5, -1.6],
     rotation: [0, 3.14, 0],
     scale: [0.6, 0.6, 1],
     url: '/artworks/風雨生信心.jpg',
-  },
-  {
-    position: [4.85, 1.5, -1.6],
-    rotation: [0, 3.14, 0],
-    scale: [0.6, 0.6, 1],
-    url: '/artworks/雨過碧山.jpg',
   },
   {
     position: [7.075, 1.5, -1.6],
@@ -40,22 +22,10 @@ const artworks: ArtworkData[] = [
     url: '/artworks/風景.jpg',
   },
   {
-    position: [9.55, 1.5, -1.6],
-    rotation: [0, 3.14, 0],
-    scale: [0.8, 0.8, 0.8],
-    url: '/artworks/有教堂的淡水風光.jpg',
-  },
-  {
     position: [13.475, 1.475, -4.225],
     rotation: [0, -1.555, 0],
     scale: [1, 1, 1],
     url: '/artworks/雙鳥棲松林.jpg',
-  },
-  {
-    position: [13.475, 1.475, -6.65],
-    rotation: [0, -1.555, 0],
-    scale: [1.1, 1.1, 1],
-    url: '/artworks/太平鳥.jpg',
   },
   {
     position: [13.78, 1.475, -3.595],
@@ -75,18 +45,6 @@ const artworks: ArtworkData[] = [
     scale: [0.5, 0.5, 1],
     url: '/artworks/四季運作_夏.jpg',
   },
-  {
-    position: [13.78, 1.475, -7.4],
-    rotation: [0, 1.575, 0],
-    scale: [0.5, 0.5, 1],
-    url: '/artworks/四季運作_春.jpg',
-  },
-  {
-    position: [0, 1.6, 1.3],
-    rotation: [0, 3.14, 0],
-    scale: [0.8, 0.8, 1],
-    url: '/artworks/翻案屋.jpg',
-  },
 ];
 
 export const Artworks = () => {
@@ -101,6 +59,12 @@ export const Artworks = () => {
             rotation={artwork.rotation}
             scale={artwork.scale}
             pixelPerMeter={artwork.pixelPerMeter}
+            onPointerEnter={() => {
+              document.body.style.cursor = 'not-allowed';
+            }}
+            onPointerLeave={() => {
+              document.body.style.cursor = 'auto';
+            }}
           />
         );
       })}

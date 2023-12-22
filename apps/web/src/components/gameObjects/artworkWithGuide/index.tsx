@@ -7,7 +7,7 @@ import { Artwork } from '../artwork';
 import dynamic from 'next/dynamic';
 import { UI } from '@/components/dom/UI';
 
-const Guide = dynamic(() => import('@/components/gameObjects/guide'), {
+const Guide = dynamic(() => import('./guide'), {
   ssr: false,
 });
 
