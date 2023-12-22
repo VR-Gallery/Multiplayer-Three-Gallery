@@ -69,7 +69,7 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
 
   useEffect(() => {
     onChangeAction('anim');
-  }, []);
+  }, [onChangeAction]);
 
   return (
     <group {...props} dispose={null}>

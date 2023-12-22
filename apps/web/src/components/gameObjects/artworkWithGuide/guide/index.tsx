@@ -63,7 +63,7 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
 
   useEffect(() => {
     onChangeAction('main');
-  }, []);
+  }, [onChangeAction]);
 
   return (
     <group {...props} dispose={null}>
