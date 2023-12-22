@@ -1,4 +1,4 @@
-FROM node:16-alpine AS builder
+FROM node:20-alpine AS builder
 RUN apk update
 # Set working directory
 WORKDIR /app
